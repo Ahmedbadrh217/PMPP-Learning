@@ -3,8 +3,11 @@
 [![CUDA](https://img.shields.io/badge/CUDA-11.0+-green?style=flat-square&logo=nvidia)](https://developer.nvidia.com/cuda-zone)
 [![C++](https://img.shields.io/badge/C++-17-blue?style=flat-square&logo=cplusplus)](https://isocpp.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
+[![Blog](https://img.shields.io/badge/Blog-smarter.xin-orange?style=flat-square)](https://smarter.xin)
 
 David Kirk 和 Wen-mei Hwu《Programming Massively Parallel Processors》第四版的学习记录，包含练习题解答、CUDA代码实现和学习笔记。
+
+> 📝 **博客主页**: [https://smarter.xin](https://smarter.xin)
 
 ---
 
@@ -45,7 +48,7 @@ David Kirk 和 Wen-mei Hwu《Programming Massively Parallel Processors》第四�
 
 ```bash
 # 克隆仓库
-git clone https://github.com/yourusername/PMPP-Learning.git
+git clone https://github.com/psmarter/PMPP-Learning.git
 cd PMPP-Learning
 
 # 进入练习目录

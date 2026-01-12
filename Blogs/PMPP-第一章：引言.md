@@ -6,15 +6,15 @@ tags:
   - GPU编程
   - 并行计算
   - PMPP
-categories:
-  - PMPP
-  - 知识分享
+categories: 知识分享
 cover: /img/PMPP.jpg
 ---
 
 ## 前言
 
 最近开始认真研读《Programming Massively Parallel Processors》第四版。第一章虽然是引言性质，但信息量相当大，系统梳理了并行计算的发展脉络、CPU与GPU的本质区别，以及CUDA如何改变了GPU编程的格局。这里详细记录一下学习过程中的理解和收获。
+
+> **📦 配套资源**：本系列文章配有完整的 [GitHub 仓库](https://github.com/psmarter/PMPP-Learning)，包含每章的练习题解答、CUDA 代码实现和详细注释。所有代码都经过测试，可以直接运行。
 
 ## 从时钟频率到多核：性能提升的转折
 
@@ -371,3 +371,7 @@ GPU性能优化需要理解许多硬件细节：
 - Hwu, W., Kirk, D., & El Hajj, I. (2022). *Programming Massively Parallel Processors: A Hands-on Approach* (4th Edition). Morgan Kaufmann.
 - [NVIDIA CUDA官方文档](https://docs.nvidia.com/cuda/)
 - [CUDA C++ Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/)
+
+---
+
+> **本文 GitHub 仓库**: [https://github.com/psmarter/PMPP-Learning](https://github.com/psmarter/PMPP-Learning)
