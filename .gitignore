@@ -38,6 +38,7 @@ GitHub习题/
 *.app
 test_vector_*
 test_matrix_*
+test_*
 
 # Windows
 *.exe
