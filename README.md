@@ -1,11 +1,11 @@
-# PMPP 学习笔记 - Programming Massively Parallel Processors
+# PMPP 学习笔记 - Programming Massively Parallel Processors（大规模并行处理器程序设计）
 
 [![CUDA](https://img.shields.io/badge/CUDA-11.0+-green?style=flat-square&logo=nvidia)](https://developer.nvidia.com/cuda-zone)
 [![C++](https://img.shields.io/badge/C++-17-blue?style=flat-square&logo=cplusplus)](https://isocpp.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 [![Blog](https://img.shields.io/badge/Blog-smarter.xin-orange?style=flat-square)](https://smarter.xin)
 
-David Kirk 和 Wen-mei Hwu《Programming Massively Parallel Processors》第四版的学习记录，包含练习题解答、CUDA代码实现和学习笔记。
+David Kirk 和 Wen-mei Hwu《Programming Massively Parallel Processors》第四版（大规模并行处理器程序设计）的学习记录，包含练习题解答、CUDA代码实现和学习笔记。
 
 > 📝 **博客主页**: [https://smarter.xin](https://smarter.xin)
 
@@ -13,7 +13,7 @@ David Kirk 和 Wen-mei Hwu《Programming Massively Parallel Processors》第四�
 
 ## 关于
 
-这个仓库记录了学习 PMPP 第四版的过程，包括：
+这个仓库记录了学习 PMPP 第四版（大规模并行处理器程序设计）的过程，包括：
 
 - 📝 每章学习笔记和核心概念总结
 - 💻 练习题的详细解答和推导过程
@@ -36,7 +36,7 @@ David Kirk 和 Wen-mei Hwu《Programming Massively Parallel Processors》第四�
 | ------ | ------ | ------ |
 | [第 2 章](Exercises/Chapter02) | 异构数据并行计算 | ✅ 完成 |
 | [第 3 章](Exercises/Chapter03) | 多维网格和数据 | ✅ 完成 |
-| 第 4 章 | 计算架构和调度 | 📅 计划中 |
+| [第 4 章](Exercises/Chapter04) | 计算架构和调度 | ✅ 完成 |
 
 ## 快速开始
 
@@ -68,12 +68,13 @@ PMPP-Learning/
 ├── Blogs/                      # 学习笔记
 │   ├── PMPP-第一章：引言.md
 │   ├── PMPP-第二章：异构数据并行计算.md
-│   └── PMPP-第三章：多维网格和数据.md
+│   ├── PMPP-第三章：多维网格和数据.md
+│   └── PMPP-第四章：计算架构和调度.md
 ├── Common/                     # 公共工具
 │   ├── utils.cuh               # CUDA 错误检查宏
-│   ├── timer.h                 # 性能计时器（支持 CPU 和 CUDA 计时）
-│   ├── stb_image.h             # 图像加载库（单头文件）
-│   └── stb_image_write.h       # 图像保存库（单头文件）
+│   ├── timer.h                 # 性能计时器
+│   ├── stb_image.h             # 图像加载库
+│   └── stb_image_write.h       # 图像保存库
 └── Exercises/                  # 章节练习
     ├── Chapter02/              # 第二章：异构数据并行计算
     │   ├── README.md           # 学习笔记和练习题解答
@@ -82,35 +83,12 @@ PMPP-Learning/
     │       ├── solution.cu
     │       ├── test.cpp
     │       └── Makefile
-    └── Chapter03/              # 第三章：多维网格和数据
-        ├── README.md           # 学习笔记和练习题解答
-        ├── Exercise01/         # 矩阵乘法（行级和列级）
-        │   ├── solution.h
-        │   ├── solution.cu
-        │   ├── test.cpp
-        │   └── Makefile
-        ├── Exercise02/         # 矩阵向量乘法
-        │   ├── solution.h
-        │   ├── solution.cu
-        │   ├── test.cpp
-        │   └── Makefile
-        ├── Exercise03/         # 标准矩阵乘法
-        │   ├── solution.h
-        │   ├── solution.cu
-        │   ├── test.cpp
-        │   └── Makefile
-        ├── Exercise04/         # RGB 转灰度
-        │   ├── solution.h
-        │   ├── solution.cu
-        │   ├── test.cpp
-        │   ├── Makefile
-        │   └── Grace_Hopper.jpg
-        └── Exercise05/         # 高斯模糊
-            ├── solution.h
-            ├── solution.cu
-            ├── test.cpp
-            ├── Makefile
-            └── Grace_Hopper.jpg
+    ├── Chapter03/              # 第三章（5 个练习：矩阵运算、图像处理）
+    │   ├── README.md
+    │   └── Exercise01-05/      # 结构同上
+    └── Chapter04/              # 第四章（1 个练习：设备属性查询）
+        ├── README.md
+        └── Exercise01/         # 结构同上
 ```
 
 ## 代码示例

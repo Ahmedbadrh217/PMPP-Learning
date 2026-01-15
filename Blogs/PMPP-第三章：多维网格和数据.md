@@ -277,8 +277,8 @@ __global__ void gaussianBlur(unsigned char *in, unsigned char *out,
 ```
 
 **关键点**：
--边界处理：这里简化为复制，也可padding/镜像
 
+- 边界处理：这里简化为复制，也可padding/镜像
 - 数据重用：相邻像素的邻域重叠，但此版本没复用
 - 优化：用Shared Memory让block协作加载tile+halo
 
@@ -376,7 +376,7 @@ dim3 gd((300-1)/16+1, (150-1)/32+1); // grid
 - 索引计算先row后col（行主序）
 - 性能分析要量化（算术强度、带宽利用率）
 
-理解了naive实现的瓶颈，才能明白Shared Memory、Tiling的价值。下一章的优化会让同样的矩阵乘法性能提升10倍以上。
+理解了naive实现的瓶颈，才能明白后续优化的价值。下一章将深入GPU架构——SM、Warp、调度机制，理解硬件才能写出高性能代码。
 
 ---
 
