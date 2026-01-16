@@ -83,22 +83,24 @@ PMPP-Learning/
     ├── Chapter02/              # 第二章：异构数据并行计算
     │   ├── README.md           # 学习笔记和练习题解答
     │   └── Exercise01/         # 向量乘法
-    │       ├── solution.h
-    │       ├── solution.cu
-    │       ├── test.cpp
-    │       └── Makefile
-    ├── Chapter03/              # 第三章（5 个练习：矩阵运算、图像处理）
+    ├── Chapter03/              # 第三章：多维网格和数据
     │   ├── README.md
-    │   └── Exercise01-05/      # 结构同上
-    ├── Chapter04/              # 第四章（1 个练习：设备属性查询）
+    │   ├── Exercise01/         # 行/列级矩阵乘法
+    │   ├── Exercise02/         # 矩阵向量乘法
+    │   ├── Exercise03/         # 标准矩阵乘法
+    │   ├── Exercise04/         # RGB 转灰度
+    │   └── Exercise05/         # 高斯模糊
+    ├── Chapter04/              # 第四章：计算架构和调度
     │   ├── README.md
-    │   └── Exercise01/         # 结构同上
-    ├── Chapter05/              # 第五章（1 个练习：Tiled 矩阵乘法）
+    │   └── Exercise01/         # 设备属性查询
+    ├── Chapter05/              # 第五章：内存架构和数据局部性
     │   ├── README.md
-    │   └── Exercise01/         # 结构同上
-    └── Chapter06/              # 第六章（1 个练习：Thread Coarsening）
+    │   ├── Exercise01/         # Tiled 矩阵乘法
+    │   └── Exercise02/         # 动态 Tile 大小矩阵乘法
+    └── Chapter06/              # 第六章：性能方面的考虑
         ├── README.md
-        └── Exercise01/         # 结构同上
+        ├── Exercise01/         # 列主序矩阵乘法 (Corner Turning)
+        └── Exercise02/         # Thread Coarsening 矩阵乘法
 ```
 
 ## 代码示例
