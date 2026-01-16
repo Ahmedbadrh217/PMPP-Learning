@@ -83,6 +83,67 @@ Tiled 矩阵乘法:  53.636 ms
 
 ---
 
+### Exercise02 - 动态 Tile 大小矩阵乘法
+
+本练习演示如何根据硬件规格动态计算最优 Tile 大小，而不是使用硬编码值。
+
+**代码位置**：`Exercise02/`
+
+**功能**：
+
+- **自动计算最优 Tile 宽度**：基于共享内存大小和线程块限制
+- **动态共享内存**：运行时分配共享内存大小
+- **性能对比**：与固定 Tile 大小版本对比
+
+**核心优化**：
+
+```cuda
+// 动态计算最优 Tile 宽度
+int calculateOptimalTileWidth(int m, int n, int o) {
+    cudaDeviceProp prop;
+    cudaGetDeviceProperties(&prop, 0);
+    
+    // 基于共享内存大小计算
+    size_t sharedMemPerBlock = prop.sharedMemPerBlock;
+    int maxTileWidth = (int)sqrt(sharedMemPerBlock / (2 * sizeof(float)));
+    
+    // 确保是 Warp 大小的倍数
+    maxTileWidth = (maxTileWidth / prop.warpSize) * prop.warpSize;
+    
+    return min(maxTileWidth, 32);  // 最大 32
+}
+```
+
+#### 运行 Exercise02
+
+```bash
+cd Exercise02
+make
+make run
+```
+
+#### 预期输出
+
+```text
+========================================
+  第五章：内存架构和数据局部性
+  Dynamic Tile Size Matrix Multiplication
+========================================
+
+设备: NVIDIA GeForce RTX 4090
+计算的最优 Tile 宽度: 32
+
+矩阵大小: 1024 × 1024 × 1024
+
+=== 正确性验证 ===
+✅ 结果正确！
+
+=== 性能测试 ===
+动态 Tile 矩阵乘法:  52.8 ms
+```
+
+---
+
 ## 📖 练习题解答
 
 ### 练习 1

@@ -38,6 +38,7 @@ David Kirk 和 Wen-mei Hwu《Programming Massively Parallel Processors》第四�
 | [第 3 章](Exercises/Chapter03) | 多维网格和数据 | ✅ 完成 |
 | [第 4 章](Exercises/Chapter04) | 计算架构和调度 | ✅ 完成 |
 | [第 5 章](Exercises/Chapter05) | 内存架构和数据局部性 | ✅ 完成 |
+| [第 6 章](Exercises/Chapter06) | 性能方面的考虑 | ✅ 完成 |
 
 ## 快速开始
 
@@ -71,7 +72,8 @@ PMPP-Learning/
 │   ├── PMPP-第二章：异构数据并行计算.md
 │   ├── PMPP-第三章：多维网格和数据.md
 │   ├── PMPP-第四章：计算架构和调度.md
-│   └── PMPP-第五章：内存架构和数据局部性.md
+│   ├── PMPP-第五章：内存架构和数据局部性.md
+│   └── PMPP-第六章：性能方面的考虑.md
 ├── Common/                     # 公共工具
 │   ├── utils.cuh               # CUDA 错误检查宏
 │   ├── timer.h                 # 性能计时器
@@ -91,7 +93,10 @@ PMPP-Learning/
     ├── Chapter04/              # 第四章（1 个练习：设备属性查询）
     │   ├── README.md
     │   └── Exercise01/         # 结构同上
-    └── Chapter05/              # 第五章（1 个练习：Tiled 矩阵乘法）
+    ├── Chapter05/              # 第五章（1 个练习：Tiled 矩阵乘法）
+    │   ├── README.md
+    │   └── Exercise01/         # 结构同上
+    └── Chapter06/              # 第六章（1 个练习：Thread Coarsening）
         ├── README.md
         └── Exercise01/         # 结构同上
 ```
