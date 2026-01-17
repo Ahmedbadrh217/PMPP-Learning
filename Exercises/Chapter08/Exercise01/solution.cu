@@ -19,6 +19,11 @@
 #include <iostream>
 #include <iomanip>
 
+// 辅助函数：向上取整除法
+inline unsigned int cdiv(unsigned int a, unsigned int b) {
+    return (a + b - 1) / b;
+}
+
 // 全局系数定义
 int c0 = 0;
 int c1 = 1;

@@ -12,8 +12,6 @@
  * 5. 寄存器优化（图8.12）
  */
 
-#include <cuda_runtime.h>
-
 // Block 尺寸定义
 // 部分 kernel 需要 3D 共享内存（立方），部分只需 2D（平方）
 #define OUT_TILE_DIM_SMALL 8
@@ -23,11 +21,6 @@
 
 // 全局系数
 extern int c0, c1, c2, c3, c4, c5, c6;
-
-// 辅助函数
-inline unsigned int cdiv(unsigned int a, unsigned int b) {
-    return (a + b - 1) / b;
-}
 
 /**
  * CPU 顺序实现（参考）
