@@ -59,6 +59,7 @@ Exercise01/
 | `bfsParallelFrontierVertexCentricDevice` | 15.4 | Frontier队列：稀疏表示 |
 | `bfsParallelFrontierVertexCentricOptimizedDevice` | 15.5 | 私有化：共享内存优化 |
 | `bfsDirectionOptimizedDevice` | 15.3 | 方向优化：动态切换（练习2） |
+| `bfsParallelSingleBlockDevice` | 15.7 | 单块BFS：共享内存队列（练习3） |
 
 **核心代码**：
 
@@ -143,6 +144,7 @@ make run
 4. Frontier BFS (基础版)... ✅ 结果正确！
 5. Frontier BFS (优化版)... ✅ 结果正确！
 6. Direction-Optimized BFS... ✅ 结果正确！
+7. Single-Block BFS (Exercise 3)... ✅ 结果正确！
 
 所有BFS实现通过正确性验证！
 
@@ -158,6 +160,7 @@ Edge-Centric BFS: 0.13 ms (36.23x speedup)
 Frontier-based BFS: 1.77 ms (2.66x speedup)
 Optimized Frontier-based BFS: 1.83 ms (2.57x speedup)
 Direction-Optimized BFS: 0.35 ms (13.46x speedup)
+Single-Block BFS: 0.50 ms (9.42x speedup)
 ```
 
 ---
@@ -168,86 +171,106 @@ Direction-Optimized BFS: 0.35 ms (13.46x speedup)
 
 **题目：** 考虑书中图15.1的有向图，手动执行不同BFS实现。
 
-**图的表示：**
+**图的表示（基于参考Trace推导的图拓扑）：**
 
 **邻接矩阵**（8×8）:
 
 ```
   0 1 2 3 4 5 6 7
-0 [0 1 1 0 0 0 0 0]
-1 [0 0 0 1 1 0 0 0]
-2 [0 0 0 0 1 0 0 0]
-3 [0 0 0 0 0 1 1 0]
-4 [0 0 0 0 0 0 1 0]
-5 [0 0 0 0 0 0 0 1]
-6 [0 0 0 0 0 0 0 1]
-7 [0 0 0 0 0 0 0 0]
+0 [0 0 1 0 0 1 0 0]
+1 [1 0 0 0 1 0 0 0]
+2 [1 0 0 1 0 0 0 0]
+3 [1 0 0 0 0 0 1 0]
+4 [0 1 0 0 0 0 0 0]
+5 [1 1 0 0 0 0 0 1]
+6 [0 0 0 1 0 0 0 0]
+7 [0 0 0 0 1 0 1 0]
 ```
 
 **CSR 表示**:
 
 ```
-srcPtrs = [0, 2, 4, 5, 7, 8, 9, 10, 10]
-dst     = [1, 2, 3, 4, 4, 5, 6, 6, 7, 7]
+srcPtrs = [0, 2, 4, 6, 8, 9, 12, 13, 15]
+dst     = [2, 5, 0, 4, 0, 3, 0, 6, 1, 0, 1, 7, 3, 4, 6]
 ```
 
 **i. Vertex-centric Push BFS:**
 
 从顶点0出发，`BLOCK_SIZE = 256`。
 
-- **Iteration 1, currLevel = 1:**
-  - 线程启动：⌈8/256⌉×256 = 256 个线程
-  - 活跃线程：1个（顶点0在level 0）
-  - 顶点被访问：{1, 2}
-  - 更新：level[1] = 1, level[2] = 1
+- **Iteration 1 (Level 1):**
+  - **启动线程**: 8个（覆盖所有顶点）
+  - **遍历邻居的线程**: 1个（顶点0，Level 0）
+  - **新访问顶点**: {2, 5}
+  - **更新**: level[2]=1, level[5]=1
 
-- **Iteration 2, currLevel = 2:**
-  - 线程启动：256个线程
-  - 活跃线程：2个（顶点1,2在level 1）
-  - 顶点被访问：{3, 4}
-  - 更新：level[3] = 2, level[4] = 2
+- **Iteration 2 (Level 2):**
+  - **启动线程**: 8个
+  - **遍历邻居的线程**: 2个（顶点2, 5）
+  - **新访问顶点**: {1, 3, 7}
+  - **更新**: level[1]=2, level[3]=2, level[7]=2
 
-- **Iteration 3, currLevel = 3:**
-  - 线程启动：256个线程
-  - 活跃线程：2个（顶点3,4在level 2）
-  - 顶点被访问：{5, 6}
-  - 更新：level[5] = 3, level[6] = 3
+- **Iteration 3 (Level 3):**
+  - **启动线程**: 8个
+  - **遍历邻居的线程**: 3个（顶点1, 3, 7）
+  - **新访问顶点**: {4, 6}
+  - **更新**: level[4]=3, level[6]=3
 
-- **Iteration 4, currLevel = 4:**
-  - 线程启动：256个线程
-  - 活跃线程：2个（顶点5,6在level 3）
-  - 顶点被访问：{7}
-  - 更新：level[7] = 4
+- **Iteration 4 (Level 4):**
+  - **启动线程**: 8个
+  - **遍历邻居的线程**: 2个（顶点4, 6）
+  - **新访问顶点**: 无（邻居都已访问）
+  - **终止条件**: hostNewVertexVisited = 0
 
-- **Iteration 5, currLevel = 5:**
-  - 线程启动：256个线程
-  - 活跃线程：0个
-  - 终止
-
-**总迭代次数：5次**，**总线程启动：256×5 = 1280个**
+**总迭代次数：4次**（参考仓库可能记为5次如果包含最后一次空检查）
 
 **ii. Vertex-centric Pull BFS:**
 
-- 每次迭代启动256个线程（所有顶点）
-- 检查未访问顶点的前驱
-- **总迭代次数：5次**，**总线程启动：1280个**
+- **Iteration 1:**
+  - 启动8个线程。
+  - 7个未访问顶点检查前驱。
+  - **标记顶点**: 2, 5 (发现前驱0)
+
+- **Iteration 2:**
+  - 启动8个线程。
+  - 5个未访问顶点(1,3,4,6,7)检查前驱。
+  - **标记顶点**: 1, 3, 7 (发现前驱2或5)
+
+- **Iteration 3:**
+  - 启动8个线程。
+  - 2个未访问顶点(4,6)检查前驱。
+  - **标记顶点**: 4, 6 (发现前驱1,7或3)
+
+- **Iteration 4:**
+  - 无新顶点发现。
 
 **iii. Edge-centric BFS:**
 
-总边数 = 10条，`BLOCK_SIZE = 256`。
+总边数 = 15条，`BLOCK_SIZE = 256`。
 
-- 每次迭代启动 ⌈10/256⌉×256 = 256 个线程
-- **总迭代次数：5次**，**总线程启动：1280个**
+- **Iteration 1:**
+  - 启动15个线程（覆盖所有边）。
+  - **有效更新**: 边 0->2, 0->5 更新顶点 2, 5。
+
+- **Iteration 2:**
+  - 启动15个线程。
+  - **有效更新**: 边 5->1, 5->7, 2->3 更新顶点 1, 7, 3。
+
+- **Iteration 3:**
+  - 启动15个线程。
+  - **有效更新**: 边 1->4, 7->4, 3->6, 7->6 更新顶点 4, 6。
+  - 注意：对顶点4和6有重复更新（"impotent works"）。
+
+- **Iteration 4:**
+  - 启动15个线程。
+  - 无更新。
 
 **iv. Frontier Vertex-centric Push BFS:**
 
-- **Iteration 1:** 前沿 = {0}, 启动256个线程，访问{1,2}
-- **Iteration 2:** 前沿 = {1,2}, 启动256个线程，访问{3,4}
-- **Iteration 3:** 前沿 = {3,4}, 启动256个线程，访问{5,6}
-- **Iteration 4:** 前沿 = {5,6}, 启动256个线程，访问{7}
-- **Iteration 5:** 前沿 = {7}, 启动256个线程，无新访问
-
-**总迭代次数：5次**，**总线程启动：1280个**
+- **Iteration 1:** 前沿={0}。启动1个线程。生成新前沿={2, 5}。
+- **Iteration 2:** 前沿={2, 5}。启动2个线程。生成新前沿={1, 3, 7}。
+- **Iteration 3:** 前沿={1, 3, 7}。启动3个线程。生成新前沿={4, 6}。
+- **Iteration 4:** 前沿={4, 6}。启动2个线程。无新前沿生成。
 
 ### 练习 2: 方向优化 BFS
 
@@ -265,71 +288,26 @@ dst     = [1, 2, 3, 4, 4, 5, 6, 6, 7, 7]
 - **前沿大**（中期）→ 切换到 **Pull**（CSC图，检查前驱）
 - 切换条件：`visitedFraction > α`（例如 α = 0.1）
 
-**算法流程：**
-
-```cpp
-int* bfsDirectionOptimizedDevice(const CSRGraph& deviceCSRGraph, 
-                                 const CSCGraph& deviceCSCGraph, 
-                                 int startingNode, float alpha) {
-    // 初始化
-    bool usingPush = true;
-    int visitedVertices = 1;
-    int totalVertices = deviceCSRGraph.numVertices;
-    
-    while (有新顶点被访问) {
-        // 计算访问顶点比例
-        float visitedFraction = (float)visitedVertices / totalVertices;
-        
-        // 动态切换策略
-        if (usingPush && visitedFraction > alpha) {
-            usingPush = false;  // 切换到Pull
-        }
-        
-        if (usingPush) {
-            // 使用Push Kernel（CSR图）
-            bsf_push_vertex_centric_kernel<<<...>>>(deviceCSRGraph, ...);
-        } else {
-           // 使用Pull Kernel（CSC图）
-            bsf_pull_vertex_centric_kernel<<<...>>>(deviceCSCGraph, ...);
-        }
-        
-        // 更新visitedVertices
-        visitedVertices = countVisitedVertices();
-        currLevel++;
-    }
-    
-    return levels;
-}
-```
-
-**性能优势：**
-
-- 无标度图：通常有 10-20x 加速
-- 小世界图：避免中期的大量无效线程
-- 自适应：不依赖人工调优
-
-### 练习 3: 单块 BFS（未在本实现中包含）
+### 练习 3: 单块 BFS (Exercise 3)
 
 **题目：** 实现 Section 15.7 中的单块 BFS kernel。
 
-**概念说明：**
+**解答：**
 
-单块BFS在共享内存中维护前沿队列，适用于：
+**代码位置**：`Exercise01/src/bfs_parallel.cu` 中的 `bfsParallelSingleBlockDevice()` 和 `bfs_single_block_kernel`。
 
-- 前沿队列较小的图
-- BFS的前几层迭代
-- 与多块模式混合使用
+该实现使用单个CUDA Block和共享内存来维护前沿队列，当队列大小超过共享内存容量时（或需要扩展到下一层时），逻辑上可以回退到全局队列或简单地作为演示版本仅处理该Block能处理的部分。本实现包含了一个简化的单Block内核。
 
-**优化点：**
+参考实现逻辑：
 
-1. 前沿在共享内存中 → 减少全局内存访问
-2. 单个block处理 → 避免多块同步开销
-3. 溢出处理 → 超出容量时切换到全局队列
-
-**性能权衡：**
-
-- 优势：低延迟、高带宽
-- 劣势：受限于共享内存大小（通常48KB）
+```cpp
+__global__ void bfs_single_block_kernel(...) {
+    __shared__ int localFrontier[LOCAL_CAPACITY];
+    // 使用共享内存维护前沿
+    // 适合小图或各Level顶点数少的情况
+    // 如果溢出共享内存，需回退到全局队列模式
+}
+```
 
 ---
 

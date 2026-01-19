@@ -101,4 +101,10 @@ int* bfsParallelFrontierVertexCentricOptimizedDevice(const CSRGraph& deviceGraph
 int* bfsDirectionOptimizedDevice(const CSRGraph& deviceCSRGraph, const CSCGraph& deviceCSCGraph, 
                                  int startingNode, float alpha);
 
+/**
+ * Single-Block BFS (练习3)
+ * 使用单个Block维护共享内存队列
+ */
+int* bfsParallelSingleBlockDevice(const CSRGraph& deviceGraph, int startingNode);
+
 #endif // BFS_PARALLEL_H

@@ -56,6 +56,7 @@ help:
 	@echo "Available targets:"
 	@echo "  make        - Build the project"
 	@echo "  make run    - Build and run the program"
-	@echo "  make clean  - Remove build artifacts"	@echo "  make help   - Show this help message"
+	@echo "  make clean  - Remove build artifacts"
+	@echo "  make help   - Show this help message"
 
 .PHONY: all dirs run clean help

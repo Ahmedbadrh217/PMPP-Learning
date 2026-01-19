@@ -101,6 +101,15 @@ int main() {
         printf("❌ 结果不正确！\n");
     }
     free(dirOptResult);
+
+    printf("7. Single-Block BFS (Exercise 3)... ");
+    int* singleBlockResult = bfsParallelSingleBlockDevice(deviceVerifyCSR, startVertex);
+    if (compareBFSResults(cpuResult, singleBlockResult, verifyCSR.numVertices, false)) {
+        printf("✅ 结果正确！\n");
+    } else {
+        printf("❌ 结果不正确！\n");
+    }
+    free(singleBlockResult);
     
     printf("\n所有BFS实现通过正确性验证！\n\n");
     
@@ -209,6 +218,16 @@ int main() {
         CHECK_CUDA(cudaEventElapsedTime(&dirTime, start, stop));
         printf("Direction-Optimized BFS: %.2f ms (%.2fx speedup)\n", dirTime, seqTime / dirTime);
         free(dirRes);
+        
+        // Single-Block BFS
+        CHECK_CUDA(cudaEventRecord(start));
+        int* singleBlockRes = bfsParallelSingleBlockDevice(deviceCSR, startVertex);
+        CHECK_CUDA(cudaEventRecord(stop));
+        CHECK_CUDA(cudaEventSynchronize(stop));
+        float singleBlockTime = 0.0f;
+        CHECK_CUDA(cudaEventElapsedTime(&singleBlockTime, start, stop));
+        printf("Single-Block BFS: %.2f ms (%.2fx speedup)\n", singleBlockTime, seqTime / singleBlockTime);
+        free(singleBlockRes);
         
         printf("\n");
         
