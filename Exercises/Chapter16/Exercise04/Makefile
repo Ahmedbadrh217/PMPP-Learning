@@ -14,7 +14,7 @@ CXX_FLAGS = -std=c++17
 LIBS = -lcublas
 
 # Common 目录路径
-COMMON_DIR = ../../Common
+COMMON_DIR = ../../../Common
 
 # 目标可执行文件
 TARGET = test_sgemm

@@ -5,8 +5,8 @@
 // ============================================================================
 
 #include "solution.h"
-#include "../../Common/timer.h"
-#include "../../Common/utils.cuh"
+#include "../../../Common/timer.h"
+#include "../../../Common/utils.cuh"
 
 #include <cmath>
 #include <cstdio>

@@ -6,7 +6,7 @@
 // ============================================================================
 
 #include "solution.h"
-#include "../../Common/utils.cuh"
+#include "../../../Common/utils.cuh"
 #include <cfloat>
 #include <cstring>
 
