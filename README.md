@@ -49,6 +49,7 @@ David Kirk 和 Wen-mei Hwu《Programming Massively Parallel Processors》第四�
 | [第 14 章](Exercises/Chapter14) | 稀疏矩阵计算 | ✅ 完成 |
 | [第 15 章](Exercises/Chapter15) | 图遍历 | ✅ 完成 |
 | [第 16 章](Exercises/Chapter16) | 深度学习 | ✅ 完成 |
+| [第 17 章](Exercises/Chapter17) | 迭代式磁共振成像重建 | ✅ 完成 |
 
 ## 快速开始
 
@@ -150,12 +151,17 @@ PMPP-Learning/
     ├── Chapter15/              # 第十五章：图遍历
     │   ├── README.md
     │   └── Exercise01/         # BFS（7种实现）
-    └── Chapter16/              # 第十六章：深度学习
+    ├── Chapter16/              # 第十六章：深度学习
+    │   ├── README.md
+    │   ├── Exercise01/         # Pooling层（Max/Avg）
+    │   ├── Exercise02/         # Conv2D反向传播（简版）
+    │   ├── Exercise03/         # CNN完整层（Conv2D+MaxPool2D）
+    │   └── Exercise04/         # cuBLAS SGEMM矩阵乘法
+    └── Chapter17/              # 第十七章：迭代式MRI重建
         ├── README.md
-        ├── Exercise01/         # Pooling层（Max/Avg）
-        ├── Exercise02/         # Conv2D反向传播（简版）
-        ├── Exercise03/         # CNN完整层（Conv2D+MaxPool2D）
-        └── Exercise04/         # cuBLAS SGEMM矩阵乘法
+        ├── Exercise01/         # 共轭梯度法（CG）
+        ├── Exercise02/         # F^H D核心计算
+        └── Exercise03/         # NUFFT Gridding
 ```
 
 ## 代码示例

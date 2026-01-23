@@ -1,0 +1,40 @@
+# ============================================================================
+# Makefile - 第十七章练习1: 共轭梯度法
+# ============================================================================
+
+NVCC = nvcc
+
+CUDA_ARCH = sm_89
+CUDA_FLAGS = -arch=$(CUDA_ARCH) -O3
+CXX_FLAGS = -std=c++17
+
+COMMON_DIR = ../../../Common
+
+TARGET = test_cg
+
+CUDA_SRC = solution.cu
+CPP_SRC = test.cpp
+
+OBJECTS = solution.o test.o
+
+all: $(TARGET)
+	@echo "Build completed successfully!"
+	@echo "Run 'make run' to execute the program"
+
+$(TARGET): $(OBJECTS)
+	$(NVCC) $(CUDA_FLAGS) -o $@ $^
+
+solution.o: $(CUDA_SRC) solution.h
+	$(NVCC) $(CUDA_FLAGS) -I$(COMMON_DIR) -c $<
+
+test.o: $(CPP_SRC) solution.h
+	$(NVCC) $(CXX_FLAGS) -I$(COMMON_DIR) -c $<
+
+run: $(TARGET)
+	./$(TARGET)
+
+clean:
+	rm -f $(TARGET) $(OBJECTS)
+	@echo "Cleaned all build files"
+
+.PHONY: all run clean
