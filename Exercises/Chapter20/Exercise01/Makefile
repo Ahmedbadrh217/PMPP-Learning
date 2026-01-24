@@ -3,7 +3,8 @@
 
 # 编译器设置
 NVCC = nvcc
-MPICXX = mpicxx
+# 使用系统 MPI 编译器（避免 Anaconda 冲突）
+MPICXX = /usr/bin/mpicxx
 
 # GPU 架构 (根据你的 GPU 调整)
 CUDA_ARCH = sm_60
