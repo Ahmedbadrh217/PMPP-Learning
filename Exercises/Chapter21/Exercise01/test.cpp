@@ -100,7 +100,7 @@ int main(int argc, char* argv[]) {
     }
     
     timer_static.stop();
-    float time_static = timer_static.elapsed();
+    float time_static = timer_static.elapsed_ms();
     printf("  静态版本耗时: %.3f ms\n", time_static);
     
     // 测试动态并行版本
@@ -115,7 +115,7 @@ int main(int argc, char* argv[]) {
     }
     
     timer_dynamic.stop();
-    float time_dynamic = timer_dynamic.elapsed();
+    float time_dynamic = timer_dynamic.elapsed_ms();
     printf("  动态并行版本耗时: %.3f ms\n\n", time_dynamic);
     
     // 验证结果

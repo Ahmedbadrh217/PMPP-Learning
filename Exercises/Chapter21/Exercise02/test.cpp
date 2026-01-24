@@ -90,7 +90,7 @@ int main(int argc, char* argv[]) {
     }
     
     printf("  ✓ 四叉树构建完成\n");
-    printf("  耗时: %.3f ms\n\n", timer.elapsed());
+    printf("  耗时: %.3f ms\n\n", timer.elapsed_ms());
     
     // 统计
     printf("================================================================\n");
