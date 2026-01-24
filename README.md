@@ -50,6 +50,7 @@ David Kirk 和 Wen-mei Hwu《Programming Massively Parallel Processors》第四�
 | [第 15 章](Exercises/Chapter15) | 图遍历 | ✅ 完成 |
 | [第 16 章](Exercises/Chapter16) | 深度学习 | ✅ 完成 |
 | [第 17 章](Exercises/Chapter17) | 迭代式磁共振成像重建 | ✅ 完成 |
+| [第 18 章](Exercises/Chapter18) | 静电势能图 | ✅ 完成 |
 
 ## 快速开始
 
@@ -94,7 +95,9 @@ PMPP-Learning/
 │   ├── PMPP-第十三章：排序.md
 │   ├── PMPP-第十四章：稀疏矩阵.md
 │   ├── PMPP-第十五章：图遍历.md
-│   └── PMPP-第十六章：深度学习.md
+│   ├── PMPP-第十六章：深度学习.md
+│   ├── PMPP-第十七章：迭代式磁共振成像重建.md
+│   └── PMPP-第十八章：静电势能图.md
 ├── Common/                     # 公共工具
 │   ├── utils.cuh               # CUDA 错误检查宏
 │   ├── timer.h                 # 性能计时器
@@ -157,11 +160,14 @@ PMPP-Learning/
     │   ├── Exercise02/         # Conv2D反向传播（简版）
     │   ├── Exercise03/         # CNN完整层（Conv2D+MaxPool2D）
     │   └── Exercise04/         # cuBLAS SGEMM矩阵乘法
-    └── Chapter17/              # 第十七章：迭代式MRI重建
+    ├── Chapter17/              # 第十七章：迭代式MRI重建
+    │   ├── README.md
+    │   ├── Exercise01/         # 共轭梯度法（CG）
+    │   ├── Exercise02/         # F^H D核心计算
+    │   └── Exercise03/         # NUFFT Gridding
+    └── Chapter18/              # 第十八章：静电势能图
         ├── README.md
-        ├── Exercise01/         # 共轭梯度法（CG）
-        ├── Exercise02/         # F^H D核心计算
-        └── Exercise03/         # NUFFT Gridding
+        └── Exercise01/         # 静电势能计算（6种实现）
 ```
 
 ## 代码示例
