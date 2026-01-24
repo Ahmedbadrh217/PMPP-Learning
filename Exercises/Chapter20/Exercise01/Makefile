@@ -16,8 +16,8 @@ $(warning MPI not found at $(MPI_INCLUDE))
 $(warning Please install OpenMPI: sudo apt install openmpi-bin libopenmpi-dev)
 endif
 
-# MPI 编译标志
-MPI_FLAGS = -I$(MPI_INCLUDE) -I$(MPI_INCLUDE)/openmpi -L$(MPI_LIB) -lmpi
+# MPI 编译标志（包含 C++ 绑定）
+MPI_FLAGS = -I$(MPI_INCLUDE) -I$(MPI_INCLUDE)/openmpi -L$(MPI_LIB) -lmpi -lmpi_cxx
 
 # 目标可执行文件
 TARGET = stencil_mpi
