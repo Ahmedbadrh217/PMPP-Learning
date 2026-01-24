@@ -3,8 +3,9 @@
 
 # 编译器设置
 NVCC = nvcc
-# 使用系统 MPI 编译器（避免 Anaconda 冲突）
+# 使用系统 MPI 编译器和运行器（避免 Anaconda 冲突）
 MPICXX = /usr/bin/mpicxx
+MPIRUN = /usr/bin/mpirun
 
 # GPU 架构 (根据你的 GPU 调整)
 CUDA_ARCH = sm_60
@@ -31,10 +32,10 @@ $(TARGET): $(SOURCES) solution.h
 
 # 运行
 run: $(TARGET)
-	mpirun -np 3 ./$(TARGET)
+	$(MPIRUN) -np 3 ./$(TARGET)
 
 run2: $(TARGET)
-	mpirun -np 2 ./$(TARGET)
+	$(MPIRUN) -np 2 ./$(TARGET)
 
 # 清理
 clean:
